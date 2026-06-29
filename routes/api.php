@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\V1\Auth\LoginController;
 use App\Http\Controllers\Api\V1\Auth\RegisterController;
 use App\Http\Controllers\Api\v1\Customer\CartController;
 use App\Http\Controllers\Api\v1\Customer\ProductController;
+use App\Http\Controllers\Api\v1\Customer\SearchController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -15,6 +16,8 @@ Route::post('logout', LogoutController::class)->middleware('auth:sanctum');;
 
 
 Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/filter', [SearchController::class, 'filter']);
+
     Route::prefix('products')->group(function () {
         Route::get('/', [ProductController::class, 'index']);
         Route::Post('/store', [ProductController::class, 'store']);

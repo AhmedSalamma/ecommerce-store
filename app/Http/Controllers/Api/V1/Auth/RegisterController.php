@@ -8,7 +8,6 @@ use App\Http\Requests\Auth\RegisterRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Exception;
-use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {

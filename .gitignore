@@ -1,5 +1,9 @@
 *.log
 .DS_Store
+.agents/
+.claude/
+.codex/
+.cursor/
 .env
 .env.backup
 .env.production
