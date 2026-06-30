@@ -9,10 +9,12 @@ class FileUploadeService{
            return;
         }
 
-        Storage::disk('public')->delete($oldImage);
-        $path =  $newImage->store($folder,'public');
+        if($oldImage && Storage::disk('public')->exists($oldImage)) {
+            Storage::disk('public')->delete($oldImage);
+        }
 
-        return  $path;
+        return   $newImage->store($folder,'public');
+        
     }
 
 

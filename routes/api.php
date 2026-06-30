@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\v1\Auth\LogoutController;
 use App\Http\Controllers\Api\V1\Auth\LoginController;
 use App\Http\Controllers\Api\V1\Auth\RegisterController;
 use App\Http\Controllers\Api\v1\Customer\CartController;
+use App\Http\Controllers\Api\v1\Customer\OrderController;
 use App\Http\Controllers\Api\v1\Customer\ProductController;
 use App\Http\Controllers\Api\v1\Customer\SearchController;
 use Illuminate\Support\Facades\Route;
@@ -32,6 +33,12 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/{product}', [CartController::class, 'store']);
         Route::patch('/{cartItem}', [CartController::class, 'update']);
         Route::delete('/{cartItem}', [CartController::class, 'delete']);
+    });
+
+    Route::prefix('orders')->group(function () {
+        Route::get('/', [OrderController::class, 'index']);
+        Route::post('/make', [OrderController::class, 'store']);
+
     });
 
 });

@@ -39,13 +39,16 @@ class CartController extends Controller
         try{
 
             DB::transaction(function () use ($product, $validated ,$request) {
+                
                 $cart = Cart::firstOrCreate([
                     'user_id' => Auth::id(),
                 ]);
 
+
                 $item = CartItem::where('cart_id', $cart->id)
                                 ->where('product_id', $product->id)
                                 ->first();
+
 
                 if ($item) {
                     $item->increment('quantity', $validated['quantity']);
@@ -60,6 +63,14 @@ class CartController extends Controller
 
                     $product->decrement('stock', $validated['quantity']);
                 }
+
+                $subtotal = $cart->cartItems->sum(function ($item) {
+                    return $item->price * $item->quantity;
+                });
+
+                $cart->update([
+                  'subtotal' => $subtotal,
+                ]);
                         
                         
                 });
