@@ -18,10 +18,14 @@ class UserResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'email' => $this->email,
+            'role' => $this->role,
             'image' => $this->image,
             'addresses' => $this->whenLoaded('addresses'),
             'cart' => $this->whenLoaded('cart'),
             'orders' => $this->whenLoaded('orders'),
+            'orders_count' => $this->whenCounted('orders'),
+            'products_count' => $this->whenCounted('products'),
+            'created_at' => $this->created_at,
         ];
     }
 }

@@ -12,6 +12,7 @@ class CategoryController extends Controller
     {
         $categories = Category::query()
             ->withCount('products')
+            ->with('images')
             ->where('is_active', true)
             ->get();
 

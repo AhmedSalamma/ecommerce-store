@@ -9,4 +9,8 @@ export const queryKeys = {
   shippingPrices: ['shipping-prices'],
   orders: (params = {}) => ['orders', params],
   order: (id) => ['order', id],
+  adminStats: ['admin', 'stats'],
+  adminProducts: (params = {}) => ['admin', 'products', params],
+  adminCategories: ['admin', 'categories'],
+  adminUsers: (params = {}) => ['admin', 'users', params],
 };

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Search, Heart, ShoppingCart, User, LogOut } from 'lucide-react';
+import { Search, Heart, ShoppingCart, User, LogOut, LayoutDashboard } from 'lucide-react';
 import { PromoBar } from '@/components/layout/PromoBar';
 import { Button } from '@/components/ui/Button';
 import { useCart } from '@/features/cart/hooks/useCart';
@@ -71,6 +71,15 @@ export function Header() {
 
           {isAuthenticated ? (
             <div className="flex items-center gap-1.5">
+              {user?.role === 'admin' && (
+                <Link
+                  to="/admin"
+                  aria-label="لوحة التحكم"
+                  className="flex h-9 w-9 items-center justify-center rounded-full text-neutral-500 transition-colors hover:bg-neutral-100"
+                >
+                  <LayoutDashboard size={17} />
+                </Link>
+              )}
               <Link
                 to="/orders"
                 className="flex items-center gap-2 rounded-full bg-neutral-100 py-1.5 pr-1.5 pl-4 text-sm font-semibold text-neutral-800 transition-colors hover:bg-neutral-200"

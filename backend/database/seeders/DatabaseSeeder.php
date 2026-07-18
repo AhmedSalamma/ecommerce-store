@@ -25,6 +25,11 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@example.com',
         ]);
 
+        User::factory()->admin()->create([
+            'name' => 'Admin',
+            'email' => 'admin@example.com',
+        ]);
+
         $categories = collect([
             ['slug' => 'phones', 'name' => 'الهواتف الذكية'],
             ['slug' => 'laptops', 'name' => 'أجهزة كمبيوتر محمولة'],
