@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\Api\V1\Admin\CategoryController as AdminCategoryController;
+use App\Http\Controllers\Api\V1\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Api\V1\Admin\ProductController as AdminProductController;
+use App\Http\Controllers\Api\V1\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Api\V1\Auth\LoginController;
 use App\Http\Controllers\Api\V1\Auth\LogoutController;
 use App\Http\Controllers\Api\V1\Auth\RegisterController;
@@ -70,4 +74,25 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/cancel', [CheckoutController::class, 'cancel'])->name('checkout.cancel');
     });
 
+});
+
+Route::middleware(['auth:sanctum', 'admin'])->prefix('admin')->group(function () {
+    Route::get('/stats', [AdminDashboardController::class, 'stats']);
+
+    Route::prefix('products')->group(function () {
+        Route::get('/', [AdminProductController::class, 'index']);
+        Route::get('/{product}', [AdminProductController::class, 'show']);
+        Route::post('/store', [AdminProductController::class, 'store']);
+        Route::post('/update/{product}', [AdminProductController::class, 'update']);
+        Route::post('/destroy/{product}', [AdminProductController::class, 'destroy']);
+    });
+
+    Route::prefix('categories')->group(function () {
+        Route::get('/', [AdminCategoryController::class, 'index']);
+        Route::post('/store', [AdminCategoryController::class, 'store']);
+        Route::post('/update/{category}', [AdminCategoryController::class, 'update']);
+        Route::post('/destroy/{category}', [AdminCategoryController::class, 'destroy']);
+    });
+
+    Route::apiResource('users', AdminUserController::class)->except(['show']);
 });
