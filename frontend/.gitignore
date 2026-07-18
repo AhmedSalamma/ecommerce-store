@@ -7,6 +7,15 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# AI tools
+.claude/
+CLAUDE.md
+AGENTS.md
+.mcp.json
+.agents/
+.cursor/
+.codex/
+
 node_modules
 dist
 dist-ssr
